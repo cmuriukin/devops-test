@@ -1,5 +1,5 @@
 
-/infrastructure/.terraform
+/infrastructure/.terraform*
 /dist
 /global/styles/fonts/ClassyIcons*
 /global/styles/fonts/_classy-icons.scss
