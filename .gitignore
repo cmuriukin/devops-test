@@ -1,0 +1,21 @@
+
+/infrastructure/.terraform
+/dist
+/global/styles/fonts/ClassyIcons*
+/global/styles/fonts/_classy-icons.scss
+/log
+/lib
+.sass-cache
+*.api.log
+xp.creds.json
+.terraform
+.env
+yarn-error.log
+/assets
+cloudflare_token.txt
+cloudflare_api_key.txt
+.tfstate files
+.tfstate
+.tfstate.*
+.terraform.lock.hcl
+
