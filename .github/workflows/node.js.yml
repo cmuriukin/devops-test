@@ -20,6 +20,7 @@ jobs:
         node-version: [14.x]
 
     steps:
+    - run: mkdir -p /tmp/nodejs
     - uses: actions/upload-artifact@v3
       with:
           name: my-artifact
