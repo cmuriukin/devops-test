@@ -34,7 +34,7 @@ jobs:
       - name: Deploy to ELB
         uses: chriscohoat/deploy-to-elb-action@master
         with:
-          script: /tmp
+          script: /
           autoscaling_group_name: ${{ secrets.AUTOSCALING_GROUP_NAME }}
           ssh_key: ${{ secrets.SSH_KEY }}
           REMOTE_PORT: 3000
