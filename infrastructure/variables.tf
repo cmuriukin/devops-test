@@ -1,6 +1,20 @@
 variable "region" {}
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
+
+variable "number_of_instances" {
+  description = "Number of instances to create and attach to ELB"
+  type        = string
+  default     = 1
+}
+
+variable "public_key" {
+  default = "tests.pub"
+}
+# Defining Private Key
+variable "private_key" {
+  default = "tests.pem"
+}
 # Definign Key Name for connection
 variable "key_name" {
   default = "tests"
