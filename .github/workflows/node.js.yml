@@ -27,7 +27,9 @@ jobs:
             path: /node
       - name: actions/setup-node
         uses: actions/setup-node@v3.4.1
-     # - run: npm test
+      - name: npm setup
+        uses: ng-easy/npm-setup@v1.7.2
+      - run: npm test
       - run: npm start
       - name: Deploy to ELB
         uses: chriscohoat/deploy-to-elb-action@master
