@@ -28,7 +28,7 @@ jobs:
       - name: Deploy to ELB
         uses: chriscohoat/deploy-to-elb-action@master
         with:
-          script: /
+          script: /tmp
           autoscaling_group_name: ${{ secrets.AUTOSCALING_GROUP_NAME }}
           ssh_key: ${{ secrets.SSH_KEY }}
         env:
