@@ -24,7 +24,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
           name: my-artifact
-          path: /
+          path: /tmp/nodejs
     - run: chown -R root /tmp/nodejs      
     - uses: actions/checkout@v2
     - run: npm install
