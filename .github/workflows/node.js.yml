@@ -43,8 +43,8 @@ jobs:
                   switches: -avzr --delete
                   path: ./*
                   remote_path: /var/www/my-app/
-                  remote_host: <host>.compute.amazonaws.com
+                  remote_host: webservers-loadbalancer-935421930.us-east-1.elb.amazonaws.com
                   remote_user: ubuntu
-                  remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
+                  remote_key: "${{ secrets.pSSH_PRIVATE_KEY }}"
 
    
