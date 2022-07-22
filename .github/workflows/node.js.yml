@@ -1,50 +1,39 @@
-
-name: CI/CD counter app
+name: CI
 
 on:
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
 
 jobs:
-#First we will see the application build or not , then we will deploy in EC2
   build:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Build the docker_compose
-      run: docker-compose up -d --build
-      
-    - name: Buid the application
-      run: docker-compose exec -T counter_app npm run build
 
-  Deploy:
-    needs: build
     runs-on: ubuntu-latest
-    
+
+    if: github.ref == 'refs/heads/master'
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
     steps:
-      - uses: actions/checkout@v2 
-      - name: Deploy in EC2
+      - uses: actions/checkout@v2
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test
+      - name: Deploy to ELB
+        uses: chriscohoat/deploy-to-elb-action@master
+        with:
+          script: /
+          autoscaling_group_name: ${{ secrets.AUTOSCALING_GROUP_NAME }}
+          ssh_key: ${{ secrets.SSH_KEY }}
         env:
-            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-            HOSTNAME : ${{ secrets.HOSTNAME  }}
-            USER_NAME : ${{ secrets.USER_NAME  }}
-            
-        run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
-           - run: npm ci
-            - run: npm run build --if-present
-            - run: npm test
-            - name: rsync deployments
-              uses: burnett01/rsync-deployments@5.1
-              with:
-                  switches: -avzr --delete
-                  path: ./*
-                  remote_path: /var/www/my-app/
-                  remote_host: webservers-loadbalancer-935421930.us-east-1.elb.amazonaws.com
-                  remote_user: ubuntu
-                  remote_key: "${{ secrets.pSSH_PRIVATE_KEY }}"
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
 
    
