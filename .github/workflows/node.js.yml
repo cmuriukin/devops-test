@@ -27,8 +27,8 @@ jobs:
             path: /node
       - name: actions/setup-node
         uses: actions/setup-node@v3.4.1
-      - run: npm run build
-      - run: npm run test
+      - run: npm test
+      - run: npm start
       - name: Deploy to ELB
         uses: chriscohoat/deploy-to-elb-action@master
         with:
