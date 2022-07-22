@@ -138,6 +138,11 @@ module "asg" {
   desired_capacity   = 1
   max_size           = 3
   min_size           = 1
+
+  vpc_zone_identifier  = [
+    "${aws_subnet.nodejs-subnet.id}",
+    "${aws_subnet.nodejs-subnet1.id}"
+  ]
 }
 
 resource "aws_autoscaling_policy" "simple_scaling" {
