@@ -28,7 +28,7 @@ jobs:
       - name: actions/setup-node
         uses: actions/setup-node@v3.4.1
       - name: npm install
-        uses: Jaid/action-npm-install@v1.2.4
+        uses: Jaid/action-npm-install@v3.4.1
       - run: npm ci
       - run: npm run build
       - run: npm run test
