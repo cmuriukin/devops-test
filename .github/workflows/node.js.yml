@@ -25,7 +25,6 @@ jobs:
       with:
           name: my-artifact
           path: /node
-    - run: chown -R root /tmp/nodejs      
     - uses: actions/checkout@v2
     - run: npm install
     - run: npm run build
