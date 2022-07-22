@@ -27,7 +27,7 @@ jobs:
             path: /node
       - name: actions/setup-node
         uses: actions/setup-node@v3.4.1
-      - run: npm test
+     # - run: npm test
       - run: npm start
       - name: Deploy to ELB
         uses: chriscohoat/deploy-to-elb-action@master
@@ -35,6 +35,7 @@ jobs:
           script: /tmp
           autoscaling_group_name: ${{ secrets.AUTOSCALING_GROUP_NAME }}
           ssh_key: ${{ secrets.SSH_KEY }}
+          REMOTE_PORT: 3000
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
