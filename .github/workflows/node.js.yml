@@ -26,7 +26,7 @@ jobs:
           name: my-artifact
           path: /node
     - uses: actions/checkout@v2
-    - run: npm install
+    - run: npm ci
     - run: npm run build
     - run: npm run test
     - name: Deploy to ELB
