@@ -27,8 +27,6 @@ jobs:
             path: /node
       - name: actions/setup-node
         uses: actions/setup-node@v3.4.1
-      - name: npm install
-        uses: bahmutov/npm-install@v1.6.0
       - run: npm test
       - run: npm start
       - name: Deploy to ELB
